@@ -4,12 +4,6 @@ import numpy as np
 import pylab
 import matplotlib.pyplot as plt
 
-directory = "C:/Users/user/Desktop/schrodinger"                                                                                           
-pathIn  = directory + '/'
-pathOut = 'C:/Users/user/Desktop/schrodinger.avi' 
-file_name = "{:03d}_schro.jpg" 
-
-#=============================================================================
 
 # Funciones necesarias
 
@@ -58,7 +52,7 @@ X    = dx*np.linspace(0,N,N)        #  Eje espacial.
 # Potential parameters
 
 V0   = 1.0e-2      # Amplitud del potencial (pasos y potenciales)
-THCK = 8          # "Thickness" (ancho) de la barrera de potencial
+THCK = 8           # "Thickness" (ancho) de la barrera de potencial
 POTENTIAL = "free" # Elija "free", "barrier" o "step"
 
 
@@ -203,38 +197,4 @@ for t in range(T + 1):
         #plt.axis('off')
         #plt.savefig(directory + '/' + file_name.format(mm), dpi=600)
         plt.show()
-        mm = mm + 1
-        print(mm)
-
-import cv2
-import os
-from os.path import isfile, join
-
-def convertToVideo(pathIn, pathOut, fps, time):
-    frame_array = []
-    files = [f for f in os.listdir(pathIn) if isfile(join(pathIn, f))]
-    #files.sort(key=lambda x: int((x.split(".")[0]).split(" ")[1]))#REORDENA FRAMES
-    for i in range(len(files)):
-        
-        filename = pathIn+files[i]
-        print(filename)
-        img=cv2.imread(filename)
-        height, width, layers = img.shape
-        size = (width,height)
-
-        for k in range (time):
-            frame_array.append(img)
-
-    out = cv2.VideoWriter(pathOut, cv2.VideoWriter_fourcc(*'mp4v'), fps, size)
-    
-    for i in range(len(frame_array)):        
-        out.write(frame_array[i])
-        
-    out.release()
-    print("TASK COMPLETED")
-
-#EJECUTAMOS  FUNCIÓN. (Descomentar para exportar video)
-fps = 60
-time = 5
-#convertToVideo(pathIn, pathOut, fps, time)
-        
+       
